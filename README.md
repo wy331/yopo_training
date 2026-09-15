@@ -34,14 +34,27 @@
 ##当前进度：
 - 位于第一阶段第11模块
 ##Ubuntu 版本：
-- Ubuntu 24.04.4 LTS
+- Ubuntu 24.04.4 LTS >>> 更改后 Ubuntu 20.04.6 LTS
 ##Python 版本：
-- Python 3.12.3
+- Python 3.12.3 >>> 更改后 Python 3.8.10
 ##已经完成的任务：
 - 安装ubuntu双系统
 - Linux命令学习
 - Git安装和配置
 ##遇到的问题：
 - git push 时 HTTPS 卡顿 → 改用 SSH 方式解决
+##下一步计划：
+- 补齐进度
+
+#阶段名称：
+-YOPO环境搭建与系统运行
+#学习目标：
+-完成 YOPO 项目的环境配置，并成功运行预训练模型
+#当前进度：
+-已完成需要任务
+##Ubuntu 版本：
+- Ubuntu 20.04.6 LTS
+##Python 版本：
+- Python 3.8.10 >>> yopo_gpu环境中：Python 3.10.21
 ##下一步计划：
 - 补齐进度
