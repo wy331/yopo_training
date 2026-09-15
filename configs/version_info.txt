@@ -1,0 +1,51 @@
+===== 记录时间 =====
+2026年 09月 15日 星期二 21:31:07 CST
+
+===== 系统信息 =====
+Distributor ID:	Ubuntu
+Description:	Ubuntu 20.04.6 LTS
+Release:	20.04
+Codename:	focal
+Linux ubuntu-YOPO 5.15.0-139-generic #149~20.04.1-Ubuntu SMP Wed Apr 16 08:29:56 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+===== ROS 版本 =====
+ROS_DISTRO=noetic
+noetic
+0.8.12
+
+===== NVIDIA 驱动与系统 CUDA =====
+Tue Sep 15 21:31:07 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.181                Driver Version: 570.181        CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5060 ...    Off |   00000000:01:00.0  On |                  N/A |
+| N/A   42C    P8              5W /   55W |     839MiB /   8151MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1295      G   /usr/lib/xorg/Xorg                       63MiB |
+|    0   N/A  N/A            1658      G   /usr/lib/xorg/Xorg                      389MiB |
+|    0   N/A  N/A            1786      G   /usr/bin/gnome-shell                     81MiB |
+|    0   N/A  N/A            2233      G   /usr/lib/firefox/firefox                218MiB |
++-----------------------------------------------------------------------------------------+
+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+===== PyTorch CUDA/cuDNN =====
+torch: 2.8.0+cu128
+torch.version.cuda: 12.8
+cudnn: 91002
+cuda available: True
+gpu: NVIDIA GeForce RTX 5060 Laptop GPU
