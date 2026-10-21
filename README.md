@@ -19,6 +19,8 @@
 - ls -l
 - rm
 
+
+
 ##项目名称：
 - YOPO 本科生暑期科研训练任务
 ##学习目标：
@@ -46,15 +48,32 @@
 ##下一步计划：
 - 补齐进度
 
-#阶段名称：
--YOPO环境搭建与系统运行
-#学习目标：
--完成 YOPO 项目的环境配置，并成功运行预训练模型
-#当前进度：
--已完成需要任务
-##Ubuntu 版本：
-- Ubuntu 20.04.6 LTS
-##Python 版本：
-- Python 3.8.10 >>> yopo_gpu环境中：Python 3.10.21
-##下一步计划：
-- 补齐进度
+
+
+##阶段名称：
+- YOPO环境搭建与系统运行
+##学习目标：
+- 完成 YOPO 项目的环境配置，并成功运行预训练模型
+##当前进度:
+- [x] Conda 环境创建（yopo_gpu）
+- [x] YOPO 依赖安装
+- [x] Controller 与 Simulator 编译
+- [x] 预训练模型运行与 RViz 目标点设置
+- [x] 至少三次自主避障运行
+- [x] 问题记录、版本记录、启动流程图整理
+##环境配置:
+- 操作系统：Ubuntu 20.04.6 LTS
+- ROS 版本：Noetic
+- CUDA Toolkit：12.8
+- NVIDIA 驱动：570.181
+- GPU：NVIDIA GeForce RTX 5060 Laptop GPU
+- Conda 环境：yopo_gpu
+- Python：3.10
+- PyTorch：2.8.0+cu128
+#Conda 环境导出文件：
+- `configs/yopo_environment.yml`
+- `configs/yopo_pip_freeze.txt`
+#版本记录：
+- `configs/version_info.txt`
+#完整启动命令:
+- `reports/第二阶段报告.txt`

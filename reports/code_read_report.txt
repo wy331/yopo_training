@@ -1,0 +1,97 @@
+## 系统概述
+
+YOPO 是一个基于深度图和状态向量的无人机局部轨迹规划网络。它接收深度图和 9 维状态，输出 traj_num 个候选轨迹的末端状态和代价分数，选择代价最小的轨迹作为最终轨迹。
+
+## 网络结构
+
+yopo_network.py 中 YopoNetwork 由三部分组成：
+
+    image_backbone：YopoBackbone，处理深度图；
+
+    state_backbone：nn.Sequential()，代码中为空；
+
+    yopo_head：YopoHead，输入为 hidden_state + observation_dim，输出 output_dim = 10。
+
+前向传播：
+python
+
+depth_feature = self.image_backbone(depth)
+obs_feature = self.state_backbone(obs)
+input_tensor = torch.cat((obs_feature, depth_feature), 1)
+output = self.yopo_head(input_tensor)
+endstate = torch.tanh(output[:, :9])
+score = torch.nn.functional.softplus(output[:, 9])
+
+## 数据输入
+
+训练时 YOPODataset.__getitem__ 返回：
+
+    image：深度图，[1, H, W]；
+
+    positions：世界系位置；
+
+    rot_wb：旋转矩阵；
+
+    random_obs：机体坐标系下的速度、加速度、目标方向，9 维；
+
+    map_idx：地图编号。
+
+推理时 YopoNet.callback_depth 处理 ROS 深度图，process_odom 构造 9 维状态。
+
+## 损失函数
+
+YOPOLoss.forward 组合四个代价：
+
+    SmoothnessLoss：jerk² 和 accel² 的时间积分；
+
+    SafetyLoss：轨迹采样点到障碍物距离的指数函数；
+
+    GuidanceLoss：轨迹方向与目标方向的偏差；
+
+    acceleration_cost：加速度平方的时间积分。
+
+权重在 denormalize_weight 中根据速度尺度调整：
+python
+
+self.smoothness_weight = cfg["ws"] / vel_scale ** 5
+self.accele_weight = cfg["wa"] / vel_scale ** 3
+self.safety_weight = cfg["wc"]
+self.goal_weight = cfg["wg"]
+
+## 训练过程
+
+YopoTrainer.forward_and_compute_loss：
+
+    状态从机体转世界系；
+
+    网络推理得到 endstate、score；
+
+    末端状态转世界系；
+
+    计算四个代价；
+
+    trajectory_loss 训练末端状态，score_loss 训练 score。
+
+## 推理与轨迹生成
+
+test_yopo_ros.py 中：
+
+    callback_depth 处理深度图；
+
+    self.policy(depth_input, obs_input) 推理；
+
+    process_output 选 score 最小的候选；
+
+    Poly5Solver 生成五次多项式；
+
+    control_pub 定时发布 PositionCommand。
+
+## ROS 数据流
+
+    订阅：/sim/odom、/depth_image、/move_base_simple/goal；
+
+    发布：/so3_control/pos_cmd。
+
+## 总结
+
+YOPO 的核心思想是：用深度图感知环境，用 9 维状态感知自身和目标，网络输出多个候选轨迹的末端状态和代价分数，选择代价最小的轨迹，用五次多项式生成平滑轨迹，通过 ROS 发布给控制器。
