@@ -40,7 +40,7 @@ add_wall_x: 1
 add_wall_y: 1
 # 森林
 tree_file: "src/pointcloud/tree.ply"
-tree_dist: 4
+tree_dist: 2
 # 房间
 room_number: 4         # 每个方向上的房间数 (房间大小 = x_length / room_number)
 max_windows: 2         # 每面墙最多窗口数
